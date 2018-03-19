@@ -1,8 +1,6 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
+## Writeup for submission
 
 ---
 
@@ -15,7 +13,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[image1]: ./test_images_output/solidWhiteCurve.jpg "Grayscale"
 
 ---
 
@@ -23,25 +21,32 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps.
+My pipeline consisted of **8** steps.
 
-First, I need to read all the images in the 'test_images' folder, using a 'for loop'
+**1**, I need to read all the images in the 'test_images' folder, using a 'for loop'
 
-Second, within the for loop, I converted the images to grayscale, then I ....
+**2**, Within the for loop, I converted the images to grayscale, then I use the Gaussian blur to smooth the edges
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+**3**, Use the Canny function to extract the edges
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+**4**, define the vertices for mask. Here the vertices will form a polygon, and the coordinates are in ccw order
 
-![alt text][image1]
+**5**, use hough fucntion to extract all the line segments from the masked edge image, and filter out the outliers
+
+**6**, use slop to identify the left and right line segments. Here the trick is that, the image is flipped upside-down, so left has negative slop, and right has positive slop. Then use linear regression to get the average slop for left and right line
+
+**7**, combine the extracted image size, left and right segments, and slops, to get the two extended lines. And finally apply the mask to only draw the region of interest. 
+
+**8**, use weighted_img to overlap the line with the original image, and output into the video
+
+[//]: # (Image References)
+
+[image1]: ./test_images_output/solidWhiteCurve.jpg
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+1. 
 
 
 ### 3. Suggest possible improvements to your pipeline
