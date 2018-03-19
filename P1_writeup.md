@@ -31,11 +31,19 @@ My pipeline consisted of **8** steps.
 
 **4**, define the vertices for mask. Here the vertices will form a polygon, and the coordinates are in ccw order
 
-**5**, use hough fucntion to extract all the line segments from the masked edge image, and filter out the outliers
+**5**, use hough function to extract all the line segments from the masked edge image, and filter out the outliers
+
+  _here I made a change of the hough function: I disabled the two lines used to generate the line_img_
+
+  `line_img = np.zeros((img.shape[0], img.shape[1], 3), dtype=np.uint8)`
+
+  `draw_lines(line_img, lines)`
 
 **6**, use slop to identify the left and right line segments. Here the trick is that, the image is flipped upside-down, so left has negative slop, and right has positive slop. Then use linear regression to get the average slop for left and right line
 
 **7**, combine the extracted image size, left and right segments, and slops, to get the two extended lines. And finally apply the mask to only draw the region of interest. 
+      
+  _here instead of changing the_ `draw_line` _function, I used the __for__ loop to process all the lines merged from __left__ and __right__
 
 **8**, use weighted_img to overlap the line with the original image, and output into the video
 
