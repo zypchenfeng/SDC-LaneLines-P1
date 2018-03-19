@@ -39,18 +39,20 @@ My pipeline consisted of **8** steps.
 
 **8**, use weighted_img to overlap the line with the original image, and output into the video
 
-[//]: # (Image References)
-
-[image1]: ./test_images_output/solidWhiteCurve.jpg
-
+<img src="./test_images_output/solidWhiteCurve.jpg" width="400" />
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-1. 
+**1**. The parameters for Gaussian blur, canny and hough transform are all manual set and not optimized
 
+**2**. The line information is not fully collected, e.g., the yellow line is treated the same as white line, which is not quite the same as traffic rules
+
+**3**. Cannot distinguishi double line or single line
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+**1**. Instead of linear fitting, can use polynomial fitting for curved lines
 
-Another potential improvement could be to ...
+**2**. Add color distinguish function/filter
+
+**3**. Currently all the fitting are human set (rule based), can use machine learning for automatic update
