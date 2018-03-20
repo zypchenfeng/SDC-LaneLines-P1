@@ -39,7 +39,7 @@ My pipeline consisted of **8** steps.
 
   `draw_lines(line_img, lines)`
 
-**6**, use slop to identify the left and right line segments. Here the trick is that, the image is flipped upside-down, so left has negative slop, and right has positive slop. Then use linear regression to get the average slop for left and right line
+**6**, use slop to identify the left and right line segments. Here the trick is that, the image is flipped upside-down, so left has negative slop, and right has positive slop. Then use linear regression to get the average slop for left and right line. (This part I made mistake and later I referred to a blog (https://campushippo.com/lessons/detect-highway-lane-lines-with-opencv-and-python-21438a3e2) to make the change)
 
 **7**, combine the extracted image size, left and right segments, and slops, to get the two extended lines. And finally apply the mask to only draw the region of interest. 
       
